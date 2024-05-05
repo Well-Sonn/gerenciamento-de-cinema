@@ -1,8 +1,9 @@
 package sistem;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Validate {
-    public static void validateUser() {
+    public static void validateUser() throws NumberFormatException, IOException {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("----------------------------------------------------------------");

@@ -9,5 +9,12 @@ public class Filme {
         this.nome = nome;
         this.anoDeLancamento = anoDeLancamento;
         this.diretor = diretor;
+        }
+
+        public static Filme getFilmePorIndice(int indice) {
+        
+            return null;
+        }
+    
     }
-}
+
