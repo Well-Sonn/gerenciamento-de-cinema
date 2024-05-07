@@ -3,6 +3,8 @@ package sistem;
 import java.io.*;
 import java.util.*;
 
+import user.Cliente;
+
 public class FileManager {
 
     private static HashMap<String, Filme> filmes = new HashMap<>();
@@ -30,7 +32,7 @@ public class FileManager {
         }
     }
 
-    public static void listMovies() {
+    public static void listMovies(Cliente cliente) {
             
         System.out.println("----------------------------------------------------------------");
         System.out.println("                ***** FILMES EM CARTAZ ******");
@@ -74,28 +76,33 @@ public class FileManager {
                 do {
                     escolhaPoltrona = questions.askForPoltrona(poltronas);
                     Poltrona.removePoltrona(escolhaPoltrona);
-                    System.out.println("Você comprou a poltrona " + escolhaPoltrona + ".");
+                    System.out.println("----------------------------------------------------------------");
+                    System.out.println("- Você reservou a poltrona " + escolhaPoltrona + ".");
                     poltronas = Poltrona.getPoltronas();
                     quantidadePoltronas++;
                 } while (questions.askForMoreSeats() && !poltronas.isEmpty());
 
-                double total = quantidadePoltronas * 20.0;
+                double total = Ingresso.calcularPrecoTotal(quantidadePoltronas);
                 if (questions.askForConfirmation(total)) {
-                    System.out.println("----------------------------------------------------------------");
-
-                    System.out.println("Reserva confirmada com sucesso. Boa sessão!");
+                    if (questions.askForEmailConfirmation()) {
+                        String email = questions.askForEmail();
+                        cliente.setEmail(email);
+                        System.out.println("- Comprovante enviado por email! Reserva confirmada com sucesso.");
+                    } else {
+                        System.out.println("- Reserva confirmada com sucesso.");
+                    }
                 } else {
-                    System.out.println("Encerrando Sessão.");
+                    System.out.println("- Encerrando Sessão.");
                 }
     
         } else if (opcao == 2) {
-            System.out.println("Saindo...");
+            System.out.println("- Saindo...");
         } else {
-            System.out.println("Opção inválida.");
+            System.out.println("- Opção inválida.");
         }
 
     } catch (IOException e) {
-        System.out.println("Ocorreu um erro ao ler o arquivo.");
+        System.out.println("- Ocorreu um erro ao ler o arquivo.");
         e.printStackTrace();
     }
 

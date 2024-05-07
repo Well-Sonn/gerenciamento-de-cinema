@@ -61,9 +61,35 @@ public class Questions {
 
     public boolean askForConfirmation(double total) {
         System.out.println("----------------------------------------------------------------");
-        System.out.println("O valor total da compra é R$" + total + ". Deseja confirmar a compra? \n- 1 - Sim, \n- 2 - Não");
+        System.out.println("- O valor total da compra é R$" + total + ". Deseja confirmar a compra? \n- 1 - Sim, \n- 2 - Não");
+        System.out.println("----------------------------------------------------------------");
         int response = scanner.nextInt();
         return response == 1;
     }
+
+    public boolean askForEmailConfirmation() {
+        System.out.println("----------------------------------------------------------------");
+        System.out.println("- Deseja receber um email de confirmação de reserva?");
+        System.out.println("- 1 - Sim");
+        System.out.println("- 2 - Não");
+        System.out.println("----------------------------------------------------------------");
+        while (!scanner.hasNextInt()) {
+            System.out.println("----------------------------------------------------------------");
+            System.out.println("- Por favor, digite 1 para Sim ou 2 para Não.");
+            System.out.println("----------------------------------------------------------------");
+            scanner.next();
+        }
+        int opcao = scanner.nextInt();
+        return opcao == 1;
+    }
+
+    public String askForEmail() {
+        System.out.println("----------------------------------------------------------------");
+        System.out.println("- Digite o email:");
+        System.out.println("----------------------------------------------------------------");
+        return scanner.next();
+    }
+
+
     
 }

@@ -2,8 +2,13 @@ package sistem;
 import java.io.IOException;
 import java.util.Scanner;
 
+import user.Cliente;
+
 public class Validate {
     public static void validateUser() throws NumberFormatException, IOException {
+
+        Cliente cliente = new Cliente();
+
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("----------------------------------------------------------------");
@@ -16,7 +21,7 @@ public class Validate {
 
         switch (userType.toLowerCase()) {
             case "1":
-                FileManager.listMovies();
+                FileManager.listMovies(cliente);
                 break;
             case "2":
                 FileManager.addMovie();
@@ -31,4 +36,6 @@ public class Validate {
 
         scanner.close();
     }
+
+    
 }
