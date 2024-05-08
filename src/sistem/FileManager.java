@@ -192,6 +192,48 @@ public class FileManager {
                 e.printStackTrace();
             }
         }
+
+        public static void searchMovies() {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("----------------------------------------------------------------");
+            System.out.println("- Digite o nome do filme que deseja consultar:");
+            String searchTerm = scanner.nextLine().trim(); // Obtém o termo de busca do usuário
+    
+            List<String> foundMovies = new ArrayList<>(); // Lista para armazenar filmes encontrados
+    
+            try {
+                BufferedReader reader = new BufferedReader(new FileReader("src/data/arquivo.txt"));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] movieData = line.split(",");
+                    String movieName = movieData[0].trim(); // Nome do filme é o primeiro item na linha
+                    String director = movieData[2].trim(); // Diretor é o terceiro item na linha
+                    if (movieName.toLowerCase().contains(searchTerm.toLowerCase())) {
+                        foundMovies.add("- Filme: "+movieName + " | Diretor: " + director); // Adiciona o nome do filme e o diretor à lista
+                        System.out.println("----------------------------------------------------------------");
+                    }
+                }
+                reader.close();
+    
+                // Ordena os filmes encontrados em ordem alfabética
+                Collections.sort(foundMovies);
+    
+                // Exibe os filmes encontrados
+                if (foundMovies.isEmpty()) {
+                    System.out.println("- Nenhum filme encontrado com o termo de busca '" + searchTerm + "'.");
+                } else {
+                    System.out.println("- Filmes encontrados com o termo de busca '" + searchTerm + "':");
+                    for (String movie : foundMovies) {
+                        System.out.println(movie);
+                    }
+                }
+            } catch (IOException e) {
+                System.out.println("- Erro ao ler o arquivo.");
+                e.printStackTrace();
+            }
+        }
+    
+    
         // Metodo publico para listar os filmes
     public static void getListarFilmes(Cliente cliente) {
         listarFilmes(cliente);

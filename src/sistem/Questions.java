@@ -10,10 +10,11 @@ public class Questions {
         this.scanner = new Scanner(System.in);
     }
 
-    public void moviesOptions() {
+    public static void moviesOptions() {
+        Scanner scanner = new Scanner(System.in);
         System.out.println("----------------------------------------------------------------");
         System.out.println("- O que você deseja: ");
-        System.out.println("- \n- 1. Cadastrar novo Filme\n- 2. Excluir Filme");
+        System.out.println("- \n- 1. Cadastrar novo Filme\n- 2. Consultar Filme \n- 3. Excluir Filme\n- 4. Finalizar Sessão");
         System.out.println("----------------------------------------------------------------");
         
         // Lendo a opção do usuário
@@ -25,12 +26,19 @@ public class Questions {
                 FileManager.getAddMovie();
                 break;
             case 2:
+                FileManager.searchMovies();
+                break;
+            case 3:
                 FileManager.getDeleteMovie(null);
-            break;
+                break;
+            case 4:
+                System.out.println("Sessão finalizada.");
+                return; // Retorna para finalizar a sessão
             default:
                 System.out.println("Opção inválida.");
                 break;
         }
+        moviesOptions(); // Chama novamente o método para continuar a sessão
     }
 
     public int askForOption() {
