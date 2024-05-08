@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Sessao {
-    public static List<String> getSessoes() {
+    private static List<String> acharSessoes() {
         List<String> sessoes = new ArrayList<>();
         try {
             BufferedReader reader = new BufferedReader(new FileReader("src/data/sessoes.txt"));
@@ -22,5 +22,8 @@ public class Sessao {
         }
         return sessoes;
     }
-
-}
+    // Metodo publico para obter a lista de sessões
+    public static List<String> getSessoes() {
+        return acharSessoes();
+    }
+}    

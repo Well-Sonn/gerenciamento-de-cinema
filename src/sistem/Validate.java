@@ -6,7 +6,7 @@ import user.Cliente;
 import user.admin;
 
 public class Validate {
-    public static void validateUser() throws NumberFormatException, IOException {
+    private static void validateUser() throws NumberFormatException, IOException {
 
         Cliente cliente = new Cliente();
 
@@ -22,12 +22,12 @@ public class Validate {
 
         switch (userType.toLowerCase()) {
             case "1":
-                FileManager.listMovies(cliente);
+                FileManager.getListarFilmes(cliente);
                 break;
             case "2":
-                if (admin.validarAdmin(true)) { // Chama o método ValidarAdmin para verificar as credenciais de administrador
+                if (admin.getValidarAdmin(true)) { // Chama o metodo publuco getValidarAdmin para verificar as credenciais de administrador
                     Questions questions = new Questions(); // Criando uma instância de Questions
-                    questions.moviesOptions(); // Chamando o método moviesOptions() a partir dessa instância
+                    questions.moviesOptions(); // Chamando o metodo moviesOptions() a partir dessa instância
                 } else {
                     System.out.println("Credenciais de administrador inválidas.");
                 }
@@ -42,6 +42,12 @@ public class Validate {
 
         scanner.close();
     }
-
-    
+    // Metodo publico para validar usuario
+    public static void getValidateUser() {
+        try {
+            validateUser();
+        } catch (NumberFormatException | IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -22,10 +22,10 @@ public class Questions {
         // Processando a opção do usuário
         switch (option) {
             case 1:
-                FileManager.addMovie();
+                FileManager.getAddMovie();
                 break;
             case 2:
-                FileManager.deleteMovie();
+                FileManager.getDeleteMovie(null);
             break;
             default:
                 System.out.println("Opção inválida.");
@@ -45,7 +45,7 @@ public class Questions {
         System.out.println("Escolha um filme:");
         for (int i = 0; i < listaDeFilmes.size(); i++) {
             Filme filme = listaDeFilmes.get(i);
-            System.out.println((i + 1) + " - " + filme.nome + "  - SALA: " + filme.sala);
+            System.out.println((i + 1) + " - " + filme.getNome() + "  - SALA: " + filme.getSala());
         }
         System.out.println("----------------------------------------------------------------");
         return scanner.nextInt();
@@ -76,7 +76,7 @@ public class Questions {
     }
 
     public boolean askForMoreSeats() {
-        System.out.println("- Deseja adicionar mais algum lugar? \n- 1 - Sim, \n- 2 - Não");
+        System.out.println("- Deseja adicionar mais algum lugar? \n- 1 - Sim \n- 2 - Não");
         System.out.println("----------------------------------------------------------------");
         int response = scanner.nextInt();
         return response == 1;
@@ -84,7 +84,7 @@ public class Questions {
 
     public boolean askForConfirmation(double total) {
         System.out.println("----------------------------------------------------------------");
-        System.out.println("- O valor total da compra é R$" + total + ". Deseja confirmar a compra? \n- 1 - Sim, \n- 2 - Não");
+        System.out.println("- O valor total da compra é R$" + total + ". Deseja confirmar a compra? \n- 1 - Sim \n- 2 - Não");
         System.out.println("----------------------------------------------------------------");
         int response = scanner.nextInt();
         return response == 1;

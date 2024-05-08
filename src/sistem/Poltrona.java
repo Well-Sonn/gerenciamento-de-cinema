@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Poltrona {
-    public static List<String> getPoltronas() {
+    private static List<String> acharPoltronas() {
         List<String> poltronas = new ArrayList<>();
         try {
             BufferedReader reader = new BufferedReader(new FileReader("src/data/poltronas.txt"));
@@ -24,8 +24,8 @@ public class Poltrona {
         return poltronas;
     }
 
-    public static void removePoltrona(String poltrona) {
-        List<String> poltronas = getPoltronas();
+    private static void removePoltrona(String poltrona) {
+        List<String> poltronas = acharPoltronas();
         poltronas.remove(poltrona);
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter("src/data/poltronas.txt"));
@@ -38,4 +38,13 @@ public class Poltrona {
             e.printStackTrace();
         }
     }
+    // Metodo publico para obter a lista de poltronas
+    public static List<String> getPoltronas() {
+        return acharPoltronas();
+    }   
+    // Metodo publico para remover uma poltrona
+    public static void getRemoverPoltrona(String poltrona) {
+        removePoltrona(poltrona);
+    }
+
 }

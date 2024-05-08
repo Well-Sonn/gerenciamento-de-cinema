@@ -9,7 +9,7 @@ public class FileManager {
 
     private static HashMap<String, Filme> filmes = new HashMap<>();
 
-    public static void addMovie() {
+    private static void addMovie() {
         Scanner scanner2 = new Scanner(System.in);
         System.out.println("Digite o nome do filme:");
         String nome = scanner2.nextLine();
@@ -37,7 +37,7 @@ public class FileManager {
         }
     }
 
-    public static void listMovies(Cliente cliente) {
+    private static void listarFilmes(Cliente cliente) {
             
         System.out.println("----------------------------------------------------------------");
         System.out.println("                ***** FILMES EM CARTAZ ******");
@@ -62,7 +62,7 @@ public class FileManager {
 
             for (int i = 0; i < listaDeFilmes.size(); i++) {
                 Filme filme = listaDeFilmes.get(i);
-                System.out.println((i + 1) + " - Nome: " + filme.nome +  " | Ano de Lançamento: " + filme.anoDeLancamento + " | Diretor: " + filme.diretor);
+                System.out.println((i + 1) + " - Nome: " + filme.getNome() +  " | Ano de Lançamento: " + filme.getAnoDeLancamento() + " | Diretor: " + filme.getDiretor());
                 System.out.println("");
             }
 
@@ -72,7 +72,7 @@ public class FileManager {
                 int escolhaFilme = questions.askForMovie(listaDeFilmes);
                 Filme filmeEscolhido = listaDeFilmes.get(escolhaFilme - 1);
                 System.out.println("----------------------------------------------------------------");
-                System.out.println("- Você escolheu o filme: " + filmeEscolhido.nome + "\n- Sessões disponíveis para este filme:\n-" );
+                System.out.println("- Você escolheu o filme: " + filmeEscolhido.getNome() + "\n- Sessões disponíveis para este filme:\n-" );
                 List<String> sessoes = Sessao.getSessoes();
                 int escolhaSessao = questions.askForSession(sessoes);
                 String sessaoEscolhida = sessoes.get(escolhaSessao - 1);
@@ -84,14 +84,14 @@ public class FileManager {
                 int quantidadePoltronas = 0;
                 do {
                     escolhaPoltrona = questions.askForPoltrona(poltronas);
-                    Poltrona.removePoltrona(escolhaPoltrona);
+                    Poltrona.getRemoverPoltrona(escolhaPoltrona);
                     System.out.println("----------------------------------------------------------------");
                     System.out.println("- Você reservou a poltrona " + escolhaPoltrona + ".");
                     poltronas = Poltrona.getPoltronas();
                     quantidadePoltronas++;
                 } while (questions.askForMoreSeats() && !poltronas.isEmpty());
 
-                double total = Ingresso.calcularPrecoTotal(quantidadePoltronas);
+                double total = Ingresso.getCalcularPrecoTotal(quantidadePoltronas);
                 if (questions.askForConfirmation(total)) {
                     if (questions.askForEmailConfirmation()) {
                         String email = questions.askForEmail();
@@ -119,7 +119,7 @@ public class FileManager {
 
         }
 
-        public static void deleteMovie() {
+        private static void deleteMovie(String nome) {
             try {
                 // Lê os filmes do arquivo
                 List<String> lines = new ArrayList<>();
@@ -135,7 +135,7 @@ public class FileManager {
                 System.out.println("Filmes disponíveis para exclusão:");
                 for (int i = 0; i < lines.size(); i++) {
                     String[] parts = lines.get(i).split(","); // Divide a linha em partes usando a vírgula como separador
-                    String nome = parts[0]; // O nome do filme é a primeira parte
+                    String nome1 = parts[0]; // O nome do filme é a primeira parte
                     String diretor = parts[2]; // O diretor está na terceira parte
                     System.out.println((i + 1) + ". Filme: " + nome + " |   Diretor: " + diretor);
                 }
@@ -192,6 +192,19 @@ public class FileManager {
                 e.printStackTrace();
             }
         }
+        // Metodo publico para listar os filmes
+    public static void getListarFilmes(Cliente cliente) {
+        listarFilmes(cliente);
     }
+        // Método publico para adicionar um filme
+    public static void getAddMovie() {
+        addMovie();
+    }
+    // Método publico para excluir um filme
+    public static void getDeleteMovie(String nome) {
+        deleteMovie(nome);
+    }
+
+}
 
     

@@ -4,7 +4,7 @@ import java.io.Console;
 
 public class admin {
     
-    public static boolean validarAdmin(boolean isAdmin) {
+    private static boolean validarAdmin(boolean isAdmin) {
         if (isAdmin) {
             Console console = System.console();
             if (console == null) {
@@ -24,5 +24,9 @@ public class admin {
         } else {
             return false; // Se não for admin, não precisa validar
         }
+    }
+    // Método público para chamar validarAdmin()
+    public static boolean getValidarAdmin(boolean isAdmin) {
+        return validarAdmin(isAdmin);
     }
 }
