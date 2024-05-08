@@ -62,6 +62,12 @@ classDiagram
         -validarAdmin(boolean isAdmin): boolean
         +getValidarAdmin(boolean isAdmin): boolean
     }
+    class Ingresso {
+        -PRECO_INGRESSO: double
+        -IMPOSTO: double
+        -calcularPrecoTotal(int quantidade): double
+        +getCalcularPrecoTotal(int quantidade): double
+    }
 
     Main --> Validate
     Validate --> FileManager
@@ -71,6 +77,8 @@ classDiagram
     FileManager --> Poltrona
     FileManager --> Cliente
     admin --> Validate
+    FileManager --> Ingresso
+
 
 
 ```
