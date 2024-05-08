@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import user.Cliente;
+import user.admin;
 
 public class Validate {
     public static void validateUser() throws NumberFormatException, IOException {
@@ -24,7 +25,12 @@ public class Validate {
                 FileManager.listMovies(cliente);
                 break;
             case "2":
-                FileManager.addMovie();
+                if (admin.ValidarAdmin(true)) { // Chama o método ValidarAdmin para verificar as credenciais de administrador
+                    Questions questions = new Questions(); // Criando uma instância de Questions
+                    questions.moviesOptions(); // Chamando o método moviesOptions() a partir dessa instância
+                } else {
+                    System.out.println("Credenciais de administrador inválidas.");
+                }
                 break;
             case "3":
                 System.out.println("Fechar janela e encerrar");

@@ -10,6 +10,32 @@ public class Questions {
         this.scanner = new Scanner(System.in);
     }
 
+    public void moviesOptions() {
+        System.out.println("----------------------------------------------------------------");
+        System.out.println("- O que você deseja: ");
+        System.out.println("- \n- 1. Cadastrar novo Filme\n- 2. Alterar Filme\n- 3. Excluir Filme");
+        System.out.println("----------------------------------------------------------------");
+        
+        // Lendo a opção do usuário
+        int option = scanner.nextInt();
+        
+        // Processando a opção do usuário
+        switch (option) {
+            case 1:
+                FileManager.addMovie();
+                break;
+            case 2:
+                // FileManager.alterMovie();
+                break;
+            case 3:
+                // FileManager.deleteMovie();
+                break;
+            default:
+                System.out.println("Opção inválida.");
+                break;
+        }
+    }
+
     public int askForOption() {
         System.out.println("----------------------------------------------------------------");
         System.out.println("Deseja agendar uma sessão? \n- 1 - Sim \n- 2 - Não");

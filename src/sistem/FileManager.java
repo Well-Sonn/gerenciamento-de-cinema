@@ -10,16 +10,16 @@ public class FileManager {
     private static HashMap<String, Filme> filmes = new HashMap<>();
 
     public static void addMovie() {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner2 = new Scanner(System.in);
         System.out.println("Digite o nome do filme:");
-        String nome = scanner.nextLine();
+        String nome = scanner2.nextLine();
         System.out.println("Digite o ano de lançamento do filme:");
-        int anoDeLancamento = scanner.nextInt();
-        scanner.nextLine();
+        int anoDeLancamento = scanner2.nextInt();
+        scanner2.nextLine();
         System.out.println("Digite o diretor do filme:");
-        String diretor = scanner.nextLine();    
+        String diretor = scanner2.nextLine();    
         System.out.println("Em qual sala deve passar esse filme?");
-        int sala = scanner.nextInt();
+        int sala = scanner2.nextInt();
 
         Filme filme = new Filme(nome, anoDeLancamento, diretor, sala);
         filmes.put(nome, filme);
@@ -28,6 +28,9 @@ public class FileManager {
             PrintWriter out = new PrintWriter(new FileWriter("src/data/arquivo.txt", true));
             out.println(nome + "," + anoDeLancamento + "," + diretor + "," + sala);
             out.close();
+            System.out.println("----------------------------------------------------------------");
+            System.out.println("- Filme cadastrado com sucesso!");
+            System.out.println("----------------------------------------------------------------"); 
         } catch (IOException e) {
             System.out.println("Ocorreu um erro ao salvar o arquivo.");
             e.printStackTrace();
