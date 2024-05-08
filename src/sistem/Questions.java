@@ -22,7 +22,7 @@ public class Questions {
         System.out.println("Escolha um filme:");
         for (int i = 0; i < listaDeFilmes.size(); i++) {
             Filme filme = listaDeFilmes.get(i);
-            System.out.println((i + 1) + " - " + filme.nome);
+            System.out.println((i + 1) + " - " + filme.nome + "  - SALA: " + filme.sala);
         }
         System.out.println("----------------------------------------------------------------");
         return scanner.nextInt();

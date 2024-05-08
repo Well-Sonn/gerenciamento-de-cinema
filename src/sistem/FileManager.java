@@ -15,16 +15,18 @@ public class FileManager {
         String nome = scanner.nextLine();
         System.out.println("Digite o ano de lançamento do filme:");
         int anoDeLancamento = scanner.nextInt();
-        scanner.nextLine(); // Consumir sobras de nova linha
+        scanner.nextLine();
         System.out.println("Digite o diretor do filme:");
-        String diretor = scanner.nextLine();
+        String diretor = scanner.nextLine();    
+        System.out.println("Em qual sala deve passar esse filme?");
+        int sala = scanner.nextInt();
 
-        Filme filme = new Filme(nome, anoDeLancamento, diretor);
+        Filme filme = new Filme(nome, anoDeLancamento, diretor, sala);
         filmes.put(nome, filme);
 
         try {
             PrintWriter out = new PrintWriter(new FileWriter("src/data/arquivo.txt", true));
-            out.println(nome + "," + anoDeLancamento + "," + diretor);
+            out.println(nome + "," + anoDeLancamento + "," + diretor + "," + sala);
             out.close();
         } catch (IOException e) {
             System.out.println("Ocorreu um erro ao salvar o arquivo.");
@@ -45,7 +47,7 @@ public class FileManager {
             List<Filme> listaDeFilmes = new ArrayList<>();
             while ((line = reader.readLine()) != null) {
                 String[] attributes = line.split(",");
-                Filme filme = new Filme(attributes[0], Integer.parseInt(attributes[1]), attributes[2]);
+                Filme filme = new Filme(attributes[0], Integer.parseInt(attributes[1]), attributes[2], 0);
                 filmes.put(attributes[0], filme);
                 listaDeFilmes.add(filme);
             }
