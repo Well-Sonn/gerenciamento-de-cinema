@@ -25,7 +25,7 @@ public class Validate {
                 FileManager.listMovies(cliente);
                 break;
             case "2":
-                if (admin.ValidarAdmin(true)) { // Chama o método ValidarAdmin para verificar as credenciais de administrador
+                if (admin.validarAdmin(true)) { // Chama o método ValidarAdmin para verificar as credenciais de administrador
                     Questions questions = new Questions(); // Criando uma instância de Questions
                     questions.moviesOptions(); // Chamando o método moviesOptions() a partir dessa instância
                 } else {
@@ -33,7 +33,7 @@ public class Validate {
                 }
                 break;
             case "3":
-                System.out.println("Fechar janela e encerrar");
+                System.out.println("Sessão Encerrada!");
                 break;
             default:
                 System.out.println("Tipo de usuário inválido");

@@ -13,7 +13,7 @@ public class Questions {
     public void moviesOptions() {
         System.out.println("----------------------------------------------------------------");
         System.out.println("- O que você deseja: ");
-        System.out.println("- \n- 1. Cadastrar novo Filme\n- 2. Alterar Filme\n- 3. Excluir Filme");
+        System.out.println("- \n- 1. Cadastrar novo Filme\n- 2. Excluir Filme");
         System.out.println("----------------------------------------------------------------");
         
         // Lendo a opção do usuário
@@ -25,11 +25,8 @@ public class Questions {
                 FileManager.addMovie();
                 break;
             case 2:
-                // FileManager.alterMovie();
-                break;
-            case 3:
-                // FileManager.deleteMovie();
-                break;
+                FileManager.deleteMovie();
+            break;
             default:
                 System.out.println("Opção inválida.");
                 break;

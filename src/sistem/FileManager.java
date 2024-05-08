@@ -50,9 +50,13 @@ public class FileManager {
             List<Filme> listaDeFilmes = new ArrayList<>();
             while ((line = reader.readLine()) != null) {
                 String[] attributes = line.split(",");
-                Filme filme = new Filme(attributes[0], Integer.parseInt(attributes[1]), attributes[2], 0);
-                filmes.put(attributes[0], filme);
-                listaDeFilmes.add(filme);
+                if (attributes.length >= 4) { // Verifica se há pelo menos quatro elementos
+                    Filme filme = new Filme(attributes[0], Integer.parseInt(attributes[1]), attributes[2], Integer.parseInt(attributes[3]));
+                    filmes.put(attributes[0], filme);
+                    listaDeFilmes.add(filme);
+                } else {
+                    System.out.println("Formato de dados inválido na linha: " + line);
+                }
             }
             reader.close();
 
@@ -114,4 +118,80 @@ public class FileManager {
             System.out.println("----------------------------------------------------------------");
 
         }
+
+        public static void deleteMovie() {
+            try {
+                // Lê os filmes do arquivo
+                List<String> lines = new ArrayList<>();
+                BufferedReader reader = new BufferedReader(new FileReader("src/data/arquivo.txt"));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    lines.add(line);
+                }
+                reader.close();
+        
+                // Exibe os filmes para o usuário escolher qual excluir
+                System.out.println("----------------------------------------------------------------");
+                System.out.println("Filmes disponíveis para exclusão:");
+                for (int i = 0; i < lines.size(); i++) {
+                    String[] parts = lines.get(i).split(","); // Divide a linha em partes usando a vírgula como separador
+                    String nome = parts[0]; // O nome do filme é a primeira parte
+                    String diretor = parts[2]; // O diretor está na terceira parte
+                    System.out.println((i + 1) + ". Filme: " + nome + " |   Diretor: " + diretor);
+                }
+                System.out.println("----------------------------------------------------------------");
+                
+                // Pedir ao usuário para inserir o número do filme a ser excluído
+                Scanner scanner = new Scanner(System.in);
+                int movieIndex;
+                while (true) {
+                    System.out.println("- Digite o número do filme que deseja excluir:");
+                    if (scanner.hasNextInt()) {
+                        movieIndex = scanner.nextInt();
+                        if (movieIndex >= 1 && movieIndex <= lines.size()) {
+                            break; // Sai do loop se o número estiver dentro do intervalo válido
+                        } else {
+                            System.out.println("----------------------------------------------------------------");
+                            System.out.println("- Opção inválida.");
+                            System.out.println("----------------------------------------------------------------");
+
+                        }
+                    } else {
+                        System.out.println("----------------------------------------------------------------");
+                        System.out.println("- Digite um número válido.");
+                        System.out.println("----------------------------------------------------------------");
+                        scanner.next(); // Limpa o buffer de entrada
+                    }
+                }
+                scanner.nextLine(); // Limpa o buffer
+        
+                // Pede confirmação para excluir
+                System.out.println("----------------------------------------------------------------");
+                System.out.println("- Deseja realmente excluir o filme selecionado? (\n- 1 Sim \n- 2 Não");
+                int confirm = scanner.nextInt();
+                if (confirm == 1) {
+                    // Remove o filme selecionado da lista
+                    lines.remove(movieIndex - 1);
+        
+                    // Atualiza o arquivo com os filmes restantes
+                    PrintWriter writer = new PrintWriter(new FileWriter("src/data/arquivo.txt"));
+                    for (String updatedLine : lines) {
+                        writer.println(updatedLine);
+                    }
+                    writer.close();
+                    System.out.println("----------------------------------------------------------------");
+                    System.out.println("- Filme excluído com sucesso.");
+                    System.out.println("----------------------------------------------------------------");
+                } else {
+                    System.out.println("----------------------------------------------------------------");
+                    System.out.println("- Operação cancelada.");
+                    System.out.println("----------------------------------------------------------------");
+                }
+            } catch  (IOException e) {
+                System.out.println("- Erro ao ler o arquivo.");
+                e.printStackTrace();
+            }
+        }
     }
+
+    

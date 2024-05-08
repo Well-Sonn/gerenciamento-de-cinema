@@ -1,29 +1,28 @@
 package user;
 
-import java.util.Scanner;
+import java.io.Console;
 
 public class admin {
     
-     public static boolean ValidarAdmin(boolean isAdmin) {
+    public static boolean validarAdmin(boolean isAdmin) {
         if (isAdmin) {
-            Scanner scanner = new Scanner(System.in);
+            Console console = System.console();
+            if (console == null) {
+                System.err.println("Console não disponível.");
+                System.exit(1);
+            }
+
             System.out.println("----------------------------------------------------------------");
             System.out.println("- Bem vindo usuário Administrador!");
             System.out.println("");
-            System.out.println("- Insira seu login: ");
-            String username = scanner.nextLine();
-            System.out.println("----------------------------------------------------------------");
-
-            System.out.println("Insira sua senha: ");
-            String password = scanner.nextLine();
+            String username = console.readLine("- Insira seu login: ");
+            char[] passwordArray = console.readPassword("Insira sua senha: ");
+            String password = new String(passwordArray);
             boolean isValid = username.equals("admin") && password.equals("admin123");
-
-            // scanner.close();
 
             return isValid;
         } else {
             return false; // Se não for admin, não precisa validar
         }
-        
     }
 }
